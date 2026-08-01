@@ -2,13 +2,26 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ScrollHero.css';
+import { getPlatform } from '../hooks/usePlatform';
+
+/* ── iOS assets ────────────────────────────────────────────── */
 import appStoreIcon from '../assets/App Store Icon.svg';
 import phoneHero from '../assets/iPhone Mockup Hero.png';
 import phoneImg1 from '../assets/iPhone Mockup 1.png';
 import phoneImg2 from '../assets/iPhone Mockup 2.png';
 import phoneImg3 from '../assets/iPhone Mockup 3.png';
 
+/* ── Android assets ────────────────────────────────────────── */
+import googlePlayIcon from '../assets/Android /google_play.svg';
+import androidHero from '../assets/Android /Android mockup.png';
+import androidImg1 from '../assets/Android /Android Mockup 1.png';
+import androidImg2 from '../assets/Android /Android Mockup 2.png';
+import androidImg3 from '../assets/Android /Android Mockup 3.png';
+
 gsap.registerPlugin(ScrollTrigger);
+
+const platform = getPlatform();
+const isAndroid = platform === 'android';
 
 /* ── Step copy ─────────────────────────────────────────────── */
 const STEPS = [
@@ -17,7 +30,11 @@ const STEPS = [
   { id: 3, lines: ['Gift them', 'a song.'] },
 ];
 
-const MOCKUP_IMAGES = [phoneHero, phoneImg1, phoneImg2, phoneImg3];
+const MOCKUP_IMAGES = isAndroid
+  ? [androidHero, androidImg1, androidImg2, androidImg3]
+  : [phoneHero, phoneImg1, phoneImg2, phoneImg3];
+
+const ctaIcon = isAndroid ? googlePlayIcon : appStoreIcon;
 
 export default function ScrollHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -168,7 +185,7 @@ export default function ScrollHero() {
             >
               <span className="scroll-hero-btn-text">Get the App</span>
               <img
-                src={appStoreIcon}
+                src={ctaIcon}
                 alt=""
                 className="scroll-hero-btn-icon"
                 aria-hidden="true"
@@ -190,7 +207,7 @@ export default function ScrollHero() {
               >
                 <img
                   src={img}
-                  alt={i === 0 ? "Made Songs Hero Mockup" : `Made Songs Step ${i} Mockup`}
+                  alt={i === 0 ? `Made Songs Hero Mockup (${isAndroid ? 'Android' : 'iPhone'})` : `Made Songs Step ${i} Mockup`}
                   className="scroll-mockup-img"
                   draggable={false}
                   loading={i === 0 || i === 1 ? "eager" : "lazy"}
