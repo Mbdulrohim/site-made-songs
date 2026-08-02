@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["G3H72773NY.com.reiss.madesongs"],
+        "components": [
+          {
+            "/": "/gift/*",
+            "comment": "Made Songs gift redemption links"
+          }
+        ]
+      }
+    ]
+  }
+}
