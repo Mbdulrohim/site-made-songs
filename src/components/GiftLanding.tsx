@@ -2,11 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { Download, ExternalLink, Gift, Music2, RefreshCw } from 'lucide-react';
 import logoIcon from '../assets/Logo Icon.svg';
 import { getPlatform } from '../hooks/usePlatform';
+import { getStoreUrl } from '../config/storeLinks';
 import './GiftLanding.css';
 
 const API_URL = 'https://api.madesongs.com/api/gifts/public';
-const APP_STORE_URL = 'https://apps.apple.com/app/id6784178507';
-const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.madesongs.app';
 
 interface GiftPreview {
   recipientName: string;
@@ -29,7 +28,7 @@ type ViewState =
 export default function GiftLanding({ token }: { token: string }) {
   const [state, setState] = useState<ViewState>({ status: 'loading' });
   const platform = useMemo(() => getPlatform(), []);
-  const storeUrl = platform === 'android' ? PLAY_STORE_URL : APP_STORE_URL;
+  const storeUrl = getStoreUrl(platform);
   const storeName = platform === 'android' ? 'Google Play' : 'App Store';
 
   const loadGift = async () => {

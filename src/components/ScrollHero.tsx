@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ScrollHero.css';
 import { getPlatform } from '../hooks/usePlatform';
+import { getStoreUrl } from '../config/storeLinks';
 
 /* ── iOS assets ────────────────────────────────────────────── */
 import appStoreIcon from '../assets/App Store Icon.svg';
@@ -35,6 +36,7 @@ const MOCKUP_IMAGES = isAndroid
   : [phoneHero, phoneImg1, phoneImg2, phoneImg3];
 
 const ctaIcon = isAndroid ? googlePlayIcon : appStoreIcon;
+const storeUrl = getStoreUrl(platform);
 
 export default function ScrollHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -178,7 +180,7 @@ export default function ScrollHero() {
 
             {/* CTA — nested inside copy area so it aligns perfectly with the text */}
             <a
-              href="#"
+              href={storeUrl}
               className="scroll-hero-btn"
               id="scroll-get-app"
               aria-label="Get the Made Songs app"

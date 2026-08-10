@@ -4,10 +4,12 @@ import phoneImg from '../assets/iPhone Mockup Hero.png';
 import googlePlayIcon from '../assets/Android /google_play.svg';
 import androidPhoneImg from '../assets/Android /Android mockup.png';
 import { getPlatform } from '../hooks/usePlatform';
+import { getStoreUrl } from '../config/storeLinks';
 
 const isAndroid = getPlatform() === 'android';
 const ctaIcon = isAndroid ? googlePlayIcon : appStoreIcon;
 const heroMockup = isAndroid ? androidPhoneImg : phoneImg;
+const storeUrl = getStoreUrl();
 
 export default function Hero() {
   return (
@@ -20,7 +22,7 @@ export default function Hero() {
             Make a song,<br />gift a song.
           </h1>
 
-          <a href="#" className="hero-btn" id="hero-get-app" aria-label="Get the Made Songs app">
+          <a href={storeUrl} className="hero-btn" id="hero-get-app" aria-label="Get the Made Songs app">
             <span className="hero-btn-text">Get the App</span>
             <img src={ctaIcon} alt="" className="hero-btn-icon" aria-hidden="true" />
           </a>
