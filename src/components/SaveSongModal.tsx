@@ -28,7 +28,6 @@ export const SaveSongModal: React.FC<SaveSongModalProps> = ({
   if (!isOpen) return null;
 
   const handleGetApp = () => {
-    // Attempt deep link then fall back to store
     const appUrl = `madesongs://gift/${encodeURIComponent(token || 'preview')}`;
     window.location.href = appUrl;
     setTimeout(() => {
@@ -40,12 +39,12 @@ export const SaveSongModal: React.FC<SaveSongModalProps> = ({
     <div className="save-modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div className="save-modal-backdrop" />
 
-      <div className="save-modal-content" onClick={(e) => e.stopPropagation()}>
-        {/* Close Button */}
-        <button className="save-modal-close" onClick={onClose} aria-label="Close modal">
-          <X size={20} strokeWidth={2} />
-        </button>
+      {/* Top Right Close Button */}
+      <button className="save-modal-close-btn" onClick={onClose} aria-label="Close modal">
+        <X size={22} strokeWidth={2} />
+      </button>
 
+      <div className="save-modal-content" onClick={(e) => e.stopPropagation()}>
         {/* Frame 1000015337 */}
         <div className="save-modal-inner">
           {/* Frame 1000015335 */}
