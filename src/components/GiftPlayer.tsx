@@ -15,6 +15,7 @@ import {
   VolumeX,
 } from 'lucide-react';
 import GiftBagVisual from './GiftBagVisual';
+import SaveSongModal from './SaveSongModal';
 import albumArtImg from '../assets/album_art_landscape.jpg';
 import { playerSynth } from '../utils/audioSynth';
 import { getPlatform } from '../hooks/usePlatform';
@@ -88,6 +89,7 @@ export default function GiftPlayer({ token }: { token?: string }) {
   const [activeTab, setActiveTab] = useState<'lyrics' | 'layers' | 'user'>('lyrics');
   const [isMuted, setIsMuted] = useState(false);
   const [copiedShare, setCopiedShare] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
 
   const lyricsContainerRef = useRef<HTMLDivElement>(null);
   const platform = useMemo(() => getPlatform(), []);
@@ -228,7 +230,7 @@ export default function GiftPlayer({ token }: { token?: string }) {
               className="gp-pill-btn"
               onClick={() => {
                 setCurrentScreen(3);
-                if (!isPlaying) { playerSynth.play(currentTime); setIsPlaying(true); }
+                setShowSaveModal(true);
               }}
               aria-label="Listen"
             >
@@ -361,6 +363,26 @@ export default function GiftPlayer({ token }: { token?: string }) {
           {copiedShare && <div className="gp-toast">Link copied!</div>}
         </div>
       )}
+
+      {/* Modal shown before listening to the song */}
+      <SaveSongModal
+        isOpen={showSaveModal}
+        onClose={() => {
+          setShowSaveModal(false);
+          if (!isPlaying) {
+            playerSynth.play(currentTime);
+            setIsPlaying(true);
+          }
+        }}
+        onContinueWeb={() => {
+          setShowSaveModal(false);
+          if (!isPlaying) {
+            playerSynth.play(currentTime);
+            setIsPlaying(true);
+          }
+        }}
+        token={token}
+      />
     </div>
   );
 }
