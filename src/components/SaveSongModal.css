@@ -1,0 +1,229 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SAVE SONG MODAL (Figma Frame 1000015337 / 1000015335 / 1000015117)
+   Clean transparent layout with backdrop blur — no black card box
+   ═══════════════════════════════════════════════════════════════════ */
+
+.save-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Semi-transparent dark blur backdrop */
+.save-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Properly positioned Close button (top right of screen) */
+.save-modal-close-btn {
+  position: fixed;
+  top: 24px;
+  top: max(24px, env(safe-area-inset-top, 24px));
+  right: 24px;
+  right: max(24px, env(safe-area-inset-right, 24px));
+  z-index: 1000;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.save-modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.08);
+}
+
+.save-modal-close-btn:active {
+  transform: scale(0.95);
+}
+
+/* Content wrapper (transparent, no box background) */
+.save-modal-content {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  max-width: 320px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: modalScaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Frame 1000015337 */
+.save-modal-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: clamp(48px, 8vh, 88px);
+  width: 100%;
+  max-width: 294px;
+}
+
+/* Frame 1000015335 */
+.save-modal-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+  width: 100%;
+  max-width: 294px;
+}
+
+/* SAVE THIS SONG AS YOURS */
+.save-modal-title {
+  width: 100%;
+  max-width: 294px;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 130%;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Download the app for better experience. */
+.save-modal-sub {
+  width: 100%;
+  max-width: 294px;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+/* Actions wrapper */
+.save-modal-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Frame 1000015117 - Get the app Button */
+.save-modal-get-app-btn {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  gap: 16px;
+  width: 216px;
+  height: 65px;
+  background: linear-gradient(90deg, #000000 0%, #666666 100%);
+  border: 0.7px solid #6A6A6A;
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.save-modal-get-app-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  border-color: #888888;
+  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.15);
+}
+
+.save-modal-get-app-btn:active {
+  transform: scale(0.98);
+}
+
+/* Get the app text */
+.save-modal-btn-text {
+  font-family: 'Geist', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 95%;
+  text-align: center;
+  letter-spacing: 0.005em;
+  color: #FFFFFF;
+}
+
+/* Store icon */
+.save-modal-btn-icon {
+  width: 28px;
+  height: 25px;
+  object-fit: contain;
+  filter: drop-shadow(0px 2.6px 3.4px rgba(0, 0, 0, 0.2)) drop-shadow(0px 0.76px 1.2px rgba(0, 0, 0, 0.4));
+}
+
+/* Listen on web first button */
+.save-modal-web-btn {
+  display: inline-block;
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.save-modal-web-btn:hover {
+  color: #ffffff;
+  text-decoration-color: #ffffff;
+}
+
+.save-modal-web-btn:active {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Keyframe animations */
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
