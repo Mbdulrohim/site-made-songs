@@ -56,7 +56,7 @@ const DEFAULT_SONG: SongData = {
   title: 'Sample 1',
   subtitle: 'Electric Chorus Jingle',
   genre: 'Electric Pop',
-  senderName: 'Reiss Tibby',
+  senderName: 'John Harris',
   recipientName: 'You',
   note: 'I made this custom song for you to capture our best moments.',
   albumArt: albumArtImg,
@@ -73,16 +73,28 @@ export default function GiftPlayer({ token }: { token?: string }) {
     return 1;
   });
 
-  const [song] = useState<SongData>(() => ({
-    title: searchParams.get('title') || DEFAULT_SONG.title,
-    subtitle: searchParams.get('subtitle') || searchParams.get('genre') || DEFAULT_SONG.subtitle,
-    genre: searchParams.get('genre') || DEFAULT_SONG.genre,
-    senderName: searchParams.get('sender') || DEFAULT_SONG.senderName,
-    recipientName: searchParams.get('recipient') || DEFAULT_SONG.recipientName,
-    note: searchParams.get('note') || DEFAULT_SONG.note,
-    albumArt: DEFAULT_SONG.albumArt,
-    duration: DEFAULT_SONG.duration,
-  }));
+  const [song] = useState<SongData>(() => {
+    const s = searchParams.get('sender');
+    const safeSender = (!s || s.toLowerCase().includes('reiss')) ? 'John Harris' : s;
+    return {
+      title: searchParams.get('title') || DEFAULT_SONG.title,
+      subtitle: searchParams.get('subtitle') || searchParams.get('genre') || DEFAULT_SONG.subtitle,
+      genre: searchParams.get('genre') || DEFAULT_SONG.genre,
+      senderName: safeSender,
+      recipientName: searchParams.get('recipient') || DEFAULT_SONG.recipientName,
+      note: searchParams.get('note') || DEFAULT_SONG.note,
+      albumArt: DEFAULT_SONG.albumArt,
+      duration: DEFAULT_SONG.duration,
+    };
+  });
+
+  const senderDisplayName = useMemo(() => {
+    const raw = song.senderName;
+    if (!raw || raw.toLowerCase().includes('reiss')) {
+      return 'John Harris';
+    }
+    return raw;
+  }, [song.senderName]);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -216,7 +228,7 @@ export default function GiftPlayer({ token }: { token?: string }) {
               <h1 className="gp-headline">YOU HAVE BEEN<br />GIFTED A SONG</h1>
               <div className="gp-subtext-group">
                 <p className="gp-subtext-sender">
-                  <span className="gp-sender">{song.senderName}</span> sent you a song,
+                  <span className="gp-sender">{senderDisplayName}</span> sent you a song,
                   <br />made just for you!
                 </p>
                 <p className="gp-subtext-action">
@@ -331,14 +343,14 @@ export default function GiftPlayer({ token }: { token?: string }) {
               <div className="gp-panel">
                 <div className="gp-card">
                   <div className="gp-avatar">🎁</div>
-                  <h3>Gift from {song.senderName}</h3>
+                  <h3>Gift from {senderDisplayName}</h3>
                   <p className="gp-card-sub">This song was exclusively created and gifted to you.</p>
                   <div className="gp-app-actions">
                     <button className="gp-btn-primary" onClick={openInApp}>
-                      <ExternalLink size={18} /> Open in Made Songs
+                      Open in Made Songs
                     </button>
                     <a className="gp-btn-secondary" href={storeUrl} target="_blank" rel="noreferrer">
-                      <Download size={18} /> Get on {storeName}
+                      Get on {storeName}
                     </a>
                   </div>
                 </div>
