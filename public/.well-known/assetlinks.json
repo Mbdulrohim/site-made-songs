@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.madesongs.app",
+      "sha256_cert_fingerprints": [
+        "12:75:08:4E:66:F9:1C:72:88:DD:10:A7:9A:42:1C:59:00:5C:02:65:07:09:56:39:B3:B1:BC:52:55:18:DD:70"
+      ]
+    }
+  }
+]
